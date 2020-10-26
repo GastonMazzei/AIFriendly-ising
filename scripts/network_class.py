@@ -48,9 +48,11 @@ def preprocess(df, threshold):
         print(f'for key {k} {np.count_nonzero(data[k][1])/len(data[k][1])*100}% are non-zero')
         print(f'{data[k][0].shape}')
     #
-    answ = input('if you are happy with the ratio, press "y"... else "n"')
-    if answ=='y': return data
-    else: sys.exit(1)
+    if False:
+      answ = input('if you are happy with the ratio, press "y"... else "n"')
+      if answ=='y': return data
+      else: sys.exit(1)
+    else: return data
         
 def manage_database(name):
   with open(name,'rb') as f:
@@ -167,7 +169,7 @@ def create_and_predict(data,**kwargs):
 if __name__=='__main__':
     # DEFAULT NEURONS SHOULD BE 2 JEJEJE
     import sys                                            # threshold
-    create_and_predict(preprocess(load('miniising.csv'), float(sys.argv[3])),
+    create_and_predict(preprocess(load('dataset/miniising.csv'), float(sys.argv[3])),
             neurons=int(sys.argv[1]), epochs=int(sys.argv[2]),plot=True)
 
 

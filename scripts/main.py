@@ -4,7 +4,7 @@ import numpy as np
 
 from numpy.random import rand
 from matplotlib import pyplot as plt
-from ising import *
+from extras import *
 
 for tt in range(nt):
     field = rand()*(-1)**np.random.randint(2)
@@ -51,7 +51,7 @@ if False:
   plt.show()
 
 df = pd.DataFrame({'field':[field]*len(T) ,'T':T,'E':E,'C':C,'X':X,'M':M}) # append
-with open('ising.csv', 'a') as f:
+with open('datasets/ising.csv', 'a') as f:
     df.to_csv(f, mode='a', header=f.tell()==0, index=False)
 
 #https://rajeshrinet.github.io/blog/2014/ising-model/
