@@ -27,7 +27,7 @@ def load(name):
     return pd.read_csv(name,low_memory=False).dropna().sample(frac=1)
 
 
-def preprocess(df):
+def preprocess(df, threshold):
     #
     data = {}
     print(df.head())
@@ -37,7 +37,7 @@ def preprocess(df):
     if True:
       for s in [StandardScaler]:
         x=s().fit_transform(x)
-      y = Binarizer(threshold=0.5).fit_transform(y)    
+      y = Binarizer(threshold=threshold).fit_transform(y)    
     L = df.shape[0]
     divider = {'train':slice(0,int(0.7*L)),
                'val':slice(int(0.7*L),int((0.7+0.15)*L)),
@@ -166,8 +166,8 @@ def create_and_predict(data,**kwargs):
 
 if __name__=='__main__':
     # DEFAULT NEURONS SHOULD BE 2 JEJEJE
-    import sys
-    create_and_predict(preprocess(load('miniising.csv'),),
+    import sys                                            # threshold
+    create_and_predict(preprocess(load('miniising.csv'), float(sys.argv[3])),
             neurons=int(sys.argv[1]), epochs=int(sys.argv[2]),plot=True)
 
 
