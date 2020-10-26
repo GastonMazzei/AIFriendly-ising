@@ -1,20 +1,18 @@
 
+import pandas as pd
 import numpy as np
-from numpy.random import rand
-import matplotlib.pyplot as plt
 
+from numpy.random import rand
+from matplotlib import pyplot as plt
 from ising import *
 
-#----------------------------------------------------------------------
-#  MAIN PART OF THE CODE
-#----------------------------------------------------------------------
 for tt in range(nt):
     field = rand()*(-1)**np.random.randint(2)
     E1 = M1 = E2 = M2 = 0
     config = initialstate(N)
     iT=1.0/T[tt]; iT2=iT*iT;
     
-    for i in range(eqSteps):         # equilibrate
+    for i in range(eqSteps):         
         mcmove(config, iT,field)           # Monte Carlo moves
 
     for i in range(mcSteps):
@@ -52,9 +50,9 @@ if False:
   plt.ylabel("Susceptibility", fontsize=20);   plt.axis('tight');
   plt.show()
 
-import pandas as pd
-df = pd.DataFrame({'field':[field]*len(T) ,'T':T,'E':E,'C':C,'X':X,'M':M})
+df = pd.DataFrame({'field':[field]*len(T) ,'T':T,'E':E,'C':C,'X':X,'M':M}) # append
 with open('ising.csv', 'a') as f:
     df.to_csv(f, mode='a', header=f.tell()==0, index=False)
+
 #https://rajeshrinet.github.io/blog/2014/ising-model/
 

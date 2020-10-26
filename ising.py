@@ -1,12 +1,13 @@
 import numpy as np
-from numpy.random import rand
-import matplotlib.pyplot as plt
 
-#----------------------------------------------------------------------
-##  BLOCK OF FUNCTIONS USED IN THE MAIN CODE
-#----------------------------------------------------------------------
+from numpy.random import rand
+from matplotlib import pyplot as plt
+
 def initialstate(N):   
-    ''' generates a random spin configuration for initial condition'''
+    ''' 
+    generates a random spin configuration for the
+    initial condition
+    '''
     state = 2*np.random.randint(2, size=(N,N))-1
     return state
 
@@ -50,7 +51,7 @@ N       = 8         #  size of the lattice, N x N
 eqSteps = 1024       #  number of MC sweeps for equilibration
 mcSteps = 1024       #  number of MC sweeps for calculation
 
-T       = np.linspace(np.random.uniform(1,2), np.random.uniform(2.5,4.5), nt); 
+T       = np.linspace(np.random.uniform(0.1,2), np.random.uniform(2.1,3), nt); 
 E,M,C,X = np.zeros(nt), np.zeros(nt), np.zeros(nt), np.zeros(nt)
 n1, n2  = 1.0/(mcSteps*N*N), 1.0/(mcSteps*mcSteps*N*N) 
 # divide by number of samples, and by system size to get intensive values
