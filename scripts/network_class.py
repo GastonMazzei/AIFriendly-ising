@@ -145,6 +145,7 @@ def create_and_predict(data,**kwargs):
         ax[2].legend()
         ax[2].set_title('Training & Validation accuracy & loss')
         ax[2].set_ylim(0,1)
+        f.suptitle(f'case: {kwargs["what_to_fit"]}')
         plt.savefig(f'gallery/network-result-{kwargs["what_to_fit"]}')
     return results
 
