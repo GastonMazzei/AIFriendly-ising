@@ -80,9 +80,9 @@ def create_and_predict(data,**kwargs):
             Dense(
                 kwargs.get('neurons',32),
                 activation=act,),
-            Dense(
-                kwargs.get('neurons',32),
-                activation=act,),
+            #Dense(
+            #    kwargs.get('neurons',32),
+            #    activation=act,),
             Dense(
                 1,
                 activation='sigmoid'),
