@@ -25,6 +25,7 @@ for tt in range(nt):
         M2 = M2 + Mag*Mag 
         E2 = E2 + Ene*Ene
 
+    H[tt] = float(field)
     E[tt] = n1*E1
     M[tt] = n1*M1
     C[tt] = (n1*E2 - n2*E1*E1)*iT2
@@ -50,7 +51,7 @@ if False:
   plt.ylabel("Susceptibility", fontsize=20);   plt.axis('tight');
   plt.show()
 
-df = pd.DataFrame({'field':[field]*len(T) ,'T':T,'E':E,'C':C,'X':X,'M':M}) # append
+df = pd.DataFrame({'field':H ,'T':T,'E':E,'C':C,'X':X,'M':M}) # append
 with open('datasets/ising.csv', 'a') as f:
     df.to_csv(f, mode='a', header=f.tell()==0, index=False)
 

@@ -6,7 +6,7 @@ import seaborn as sns
 from mpl_toolkits.mplot3d import Axes3D
 from matplotlib import pyplot as plt
 
-df=pd.read_csv('datasets/ising.csv')
+df=pd.read_csv('dataset/ising.csv')
 try: 
   show = int(sys.argv[1])
 except:

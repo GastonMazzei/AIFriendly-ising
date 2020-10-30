@@ -47,12 +47,12 @@ def calcMag(config):
 
 ## change these parameters for a smaller (faster) simulation 
 nt      = 5000         #  number of temperature points
-N       = 16         #  size of the lattice, N x N
+N       = 6         #  size of the lattice, N x N
 eqSteps = 1024       #  number of MC sweeps for equilibration
 mcSteps = 1024       #  number of MC sweeps for calculation
 
 T       = np.linspace(0.5, 4, nt); 
-E,M,C,X = np.zeros(nt), np.zeros(nt), np.zeros(nt), np.zeros(nt)
+E,M,C,X,H = np.zeros(nt), np.zeros(nt), np.zeros(nt), np.zeros(nt), np.zeros(nt)
 n1, n2  = 1.0/(mcSteps*N*N), 1.0/(mcSteps*mcSteps*N*N) 
 # divide by number of samples, and by system size to get intensive values
 

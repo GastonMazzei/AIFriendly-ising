@@ -3,6 +3,8 @@
 mkdir gallery
 for v in {0..3}
 do
-	python3 scripts/view.py 0 $v
+	python3 scripts/view.py 0 $v >> logs.txt
 done
-echo "DONE!"
+rm logs.txt
+echo "Done!"
+echo "ENDED!"
