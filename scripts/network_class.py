@@ -1,7 +1,4 @@
 #!/usr/bin/env python
-# coding: utf-8
-
-# In[18]:
 
 
 import numpy as np
@@ -15,7 +12,7 @@ from keras.layers import Dense
 from keras.models import Sequential
 from keras.losses import binary_crossentropy, mean_squared_error
 from keras.optimizers import SGD
-
+from keras.callbacks import EarlyStopping
 from sklearn.metrics import roc_curve, roc_auc_score as ras
 from sklearn.preprocessing import MinMaxScaler, StandardScaler, KBinsDiscretizer, PowerTransformer, Binarizer
 
@@ -84,6 +81,9 @@ def create_and_predict(data,**kwargs):
                 kwargs.get('neurons',32),
                 activation=act,),
             Dense(
+                kwargs.get('neurons',32),
+                activation=act,),
+            Dense(
                 1,
                 activation='sigmoid'),
                     ]
@@ -96,9 +96,9 @@ def create_and_predict(data,**kwargs):
     # 2) Fit
     results = model.fit(
             *data['train'],
-            batch_size=kwargs.get('batch_size',10),
+            batch_size=kwargs.get('batch_size',32),
             epochs=kwargs.get('epochs',50),
-            verbose=1,
+            verbose=1,callbacks=[EarlyStopping()],
             validation_data=data['val'],)
     #
     # 3) return results
@@ -119,11 +119,13 @@ def create_and_predict(data,**kwargs):
         ax[0].plot(tuple(fpr), tuple(tpr), label = 'NN AUC '+ str(
                                             round(
                                          ras(results['ytrue_'+case], results['ypred_'+case]),2)))
-        newytrue, newypred = data[case][1], lr(max_iter=5000).fit(*data['train']).predict_proba(data[case][0])[:,1]
-        fpr, tpr, treshold = roc_curve(
+        if False:
+          # Logistic Regression
+          newytrue, newypred = data[case][1], lr(max_iter=5000).fit(*data['train']).predict_proba(data[case][0])[:,1]
+          fpr2, tpr2, treshold = roc_curve(
               newytrue, newypred
                   )
-        ax[0].plot(tuple(fpr), tuple(tpr), label = 'Logistic AUC '+ str(
+          ax[0].plot(tuple(fpr2), tuple(tpr2), label = 'Logistic AUC '+ str(
                                             round(
                                          ras(newytrue, newypred), 2)))
         ax[0].set_title('ROC curve')
