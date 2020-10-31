@@ -29,6 +29,7 @@ bash generate_dataset.sh
 <b>The classification task will be to recognize if the variables of interest exceed a certain threshold. It can be manually set by passing a float between 0 and 1 when training e.g.</b><br>
 <br>
 <b>If no argument is passed it defaults to 50%.</b><br>
+
 ```bash
 bash generate_networkfit.sh 0.75
 ```
